@@ -1,0 +1,65 @@
+{"data":
+    {           
+        "host":"1120lab-2821-111-gw",                                # normal hostname validation: alphanum + '-', <255 chars – Approach: Present the user with a Site selection and present set of devices to select per Site. No user validation needed.
+#        "interface":"Loopback0",                                    # not relevant to a clearpass-only action – Relevant Moana integration. Not needed
+        "ip":"5.5.5.5",                                              # valid IP only (four dotted octets) – Validation ready – checks device existence
+                                                                      # (probably could further restrict to RFC-1918 + disney allocated spaces)
+        "device_type": "fabric_edges",                               # need to discuss, probably unneeded for a primitive function like this – TBD logic exists already need to check – validation in future releases
+        "description": "IP 5555 with fabric_edges device",          # <1024 chars string – Description auto created no validation needed
+         "vendor_name": "Cisco",                                      # Fixed list, unfortunately not obtainable real time that i can find – Comes from Netbox. Already validated
+        "server_data": {
+            "radius": {
+                "attributes": {
+                    "Wired_Default_Action": "OPEN"                  # Fixed list, current options: VI2,OpenInternet,Open,APAC,FGN – User selection from pulldown. No Validation needed
+                                                                      # (there does appear to be an API to pull dynamically as well -
+                                                                     # /api/attribute?filter=%7B%22name%22%3A%20%22Wired_Default_Action%22%7D
+                                                                      # but it's not in the current profile and may not be exposed until next upgrade)
+                },
+                "secret": "Compl3x"                                  # Fixed, no need to collect... but if going to collect – Comes from Vault
+                                                                      # (just in case we ever can changes it), constrain to this string only at this time
+            },
+            "tacacs": {
+                "secret": "Test123",                                 # <128 chars (probably actually 127), seems to take all typeable tho – Needs to be figured out – Auto generate password and email password to user
+                "group_name": "SDA - Cisco Wired Devices"           # Fixed list, obtainable by GETing /api/network-device-group – from Netbox – Based on device type?
+                 "attributes": {
+                          "Environment": "Build",                    # Fixed list, currently used options: Build, Production – Fixed list, pull down for user selection
+                                                                      # currently defined options: Build,Test,Production,Lab,MSP,Designated Network
+                          "Network Device Group": "ABCOTV_RW"        # Kinda fixed list, no internal constraints, lots of current options.- Need to discuss source for this data
+                                                                      # Should discuss how best to handle this one.
+                          "Managed By": "Atos",                      # Fixed list (no internal constraints tho), current options: Atos, Presidio, - Pull down for user selection
+                                                                      # Disney Telecom Services, Disney WDIroot@AWX:/home/hisaza/Disney# 
+root@AWX:/home/hisaza/Disney# 
+root@AWX:/home/hisaza/Disney# 
+root@AWX:/home/hisaza/Disney# 
+root@AWX:/home/hisaza/Disney# 
+root@AWX:/home/hisaza/Disney# cat notes.txt
+{"data":
+    {           
+        "host":"1120lab-2821-111-gw",                                # normal hostname validation: alphanum + '-', <255 chars – Approach: Present the user with a Site selection and present set of devices to select per Site. No user validation needed.
+#        "interface":"Loopback0",                                    # not relevant to a clearpass-only action – Relevant Moana integration. Not needed
+        "ip":"5.5.5.5",                                              # valid IP only (four dotted octets) – Validation ready – checks device existence
+                                                                      # (probably could further restrict to RFC-1918 + disney allocated spaces)
+        "device_type": "fabric_edges",                               # need to discuss, probably unneeded for a primitive function like this – TBD logic exists already need to check – validation in future releases
+        "description": "IP 5555 with fabric_edges device",          # <1024 chars string – Description auto created no validation needed
+         "vendor_name": "Cisco",                                      # Fixed list, unfortunately not obtainable real time that i can find – Comes from Netbox. Already validated
+        "server_data": {
+            "radius": {
+                "attributes": {
+                    "Wired_Default_Action": "OPEN"                  # Fixed list, current options: VI2,OpenInternet,Open,APAC,FGN – User selection from pulldown. No Validation needed
+                                                                      # (there does appear to be an API to pull dynamically as well -
+                                                                     # /api/attribute?filter=%7B%22name%22%3A%20%22Wired_Default_Action%22%7D
+                                                                      # but it's not in the current profile and may not be exposed until next upgrade)
+                },
+                "secret": "Compl3x"                                  # Fixed, no need to collect... but if going to collect – Comes from Vault
+                                                                      # (just in case we ever can changes it), constrain to this string only at this time
+            },
+            "tacacs": {
+                "secret": "Test123",                                 # <128 chars (probably actually 127), seems to take all typeable tho – Needs to be figured out – Auto generate password and email password to user
+                "group_name": "SDA - Cisco Wired Devices"           # Fixed list, obtainable by GETing /api/network-device-group – from Netbox – Based on device type?
+                 "attributes": {
+                          "Environment": "Build",                    # Fixed list, currently used options: Build, Production – Fixed list, pull down for user selection
+                                                                      # currently defined options: Build,Test,Production,Lab,MSP,Designated Network
+                          "Network Device Group": "ABCOTV_RW"        # Kinda fixed list, no internal constraints, lots of current options.- Need to discuss source for this data
+                                                                      # Should discuss how best to handle this one.
+                          "Managed By": "Atos",                      # Fixed list (no internal constraints tho), current options: Atos, Presidio, - Pull down for user selection
+                                                                      # Disney Telecom Services, Disney WDI
