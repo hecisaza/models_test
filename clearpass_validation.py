@@ -49,17 +49,21 @@ class AttributesTacacsData(BaseModel):
     environment: Literal["Build", "Production"]
 
 #############################################################
+# TacacsData Model
+#############################################################
 
 class TacacsData(BaseModel):
     attributes: AttributesTacacsData
     secret: constr(max_length=128)
     group: Literal["SDA - Cisco Wired Devices", "Cisco"]
 
+#############################################################
+# RadiusData Model
+#############################################################
+
 class RadiusData(BaseModel):
     attributes: AttributesRadius
     secret: str
-
-#############################################################
 
 class ServerData(BaseModel):
     radius: RadiusData
