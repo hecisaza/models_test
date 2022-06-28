@@ -85,4 +85,4 @@ class ClearPassRegister(BaseModel):
 
 
 test = ClearPassRegister(data=input_data["data"])
-print(test)
+print("TEST", test)
